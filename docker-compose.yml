@@ -10,7 +10,7 @@ services:
       - "443:443"
     volumes:
       # 01 altere /www/mvc onde /www/mvc diretório local /var/www/html diretóro container
-      - /www/shareposts:/var/www/html
+      - /www:/var/www/html
     links:
       - db
     networks:

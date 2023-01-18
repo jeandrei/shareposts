@@ -1,14 +1,14 @@
 <?php
   // DB Params
-  define("DB_HOST", "localhost");
+  define("DB_HOST", "mysql");
   define("DB_USER", "root");
-  define("DB_PASS", "123456");
-  define("DB_NAME", "traversymvc");
+  define("DB_PASS", "rootadm");
+  define("DB_NAME", "shareposts");
 
   // App Root
-  define('APPROOT', dirname(dirname(__FILE__)));
+ define('APPROOT', dirname(dirname(__FILE__)));
   // URL Root
-  define('URLROOT', 'http://localhost/shareposts');
+define('URLROOT', 'http://' . $_SERVER["SERVER_NAME"] . '/shareposts');
   // Site Name
   define('SITENAME', 'SharePosts');
   
