@@ -1,0 +1,54 @@
+version: '2'
+
+services:
+  webserver:
+    build: ./docker/webserver
+    image: php:7.4.0-apache
+    container_name: www
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      # 01 altere /www/mvc onde /www/mvc diretório local /var/www/html diretóro container
+      - /www/shareposts:/var/www/html
+    links:
+      - db
+    networks:
+      - default
+    restart: always
+
+  db:
+    image: mysql:5.7
+    container_name: mysql
+    ports:
+     - "3306:3306"
+    command: --max_allowed_packet=32505856    
+    environment:
+        #02 em troque mvc pelo nome do banco de dados do projeto
+        MYSQL_DATABASE: shareposts
+        MYSQL_USER: shareposts
+        MYSQL_PASSWORD: mypassword
+        MYSQL_ROOT_PASSWORD: rootadm 
+    volumes:
+        #03 /www/mvc/bd/mvc.sql é o caminho para o banco de dados na maquina local
+        - /www/shareposts/db/db.sql:/docker-entrypoint-initdb.d/db.sql  
+    networks:
+        - default
+    restart: always
+  
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    links: 
+    - db:db
+    container_name: phpmyadmin 
+    ports:
+    - 8000:80
+    environment:
+    #04 Troque mvc pelo nome do banco de dados do projeto
+        MYSQL_USER: shareposts
+        MYSQL_PASSWORD: mypassword
+        MYSQL_ROOT_PASSWORD: rootadm
+    restart: always
+    
+volumes:
+    dumps:
