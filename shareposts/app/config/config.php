@@ -1,21 +1,14 @@
 <?php
-// DB Params
-// Quando estiver trabalhando com container do docker-compose
-// DB_HOST é o nome do container que está rodando o banco de dados
-define('DB_HOST', 'mysql');
-define('DB_USER', 'root');
-define('DB_PASS', 'rootadm');
-define('DB_NAME', 'shareposts');
+  // DB Params
+  define("DB_HOST", "localhost");
+  define("DB_USER", "root");
+  define("DB_PASS", "123456");
+  define("DB_NAME", "traversymvc");
 
-// App Root
-define('APPROOT', dirname(dirname(__FILE__)));
-// valor que está nesta constante /var/www/html/mvc/app
-
-// URL ROOT PARA LINKS
-define('URLROOT', 'http://' . $_SERVER["SERVER_NAME"] . '/shareposts');
-
-// Site Name
-define('SITENAME', 'SharePosts');
-
-//APP VERSION
-define('APPVERSION', '1.0.0');
+  // App Root
+  define('APPROOT', dirname(dirname(__FILE__)));
+  // URL Root
+  define('URLROOT', 'http://localhost/shareposts');
+  // Site Name
+  define('SITENAME', 'SharePosts');
+  

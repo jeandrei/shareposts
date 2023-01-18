@@ -1,44 +1,33 @@
 <?php
-
-/**
- * CADA CONTROLLER TEM QUE TER SEU PRÓPRIO DIRETÓRIO DENTRO DE VIEWS
- * EX TEM CONTROLLER pages logo tem que ter um diretório pages
-*/
-class Pages extends Controller{
+  class Pages extends Controller{
     public function __construct(){
-               
-    }
-
-    // Lá no arquivo libraries/Core.php definimos que o metodo padrão é index
-    // então se não passar nada na url ele vai ler o método abaixo Index()
-    // Ao qual chama o view('index') que é o arquivo /views/index.php
-    // no arquivo Controller ele monta o  require_once '../app/views/' . $view . '.php';
-    // onde a variável $view vai ser index e concatenando fica index.php
-    //url /mvc/pages
-    public function index(){  
-        // SE O USUÁRIO ESTÁ LOGADO QUANDO CLICA NO INÍCIO VAI PARA POSTS E NÃO PARA A TELA DE BOAS VINDAS
-        if(isLoggedIn()){
-            redirect('posts');
-        }
-
-        $data = [
-           'title' => 'SharePosts',
-           'description' => 'Uma Simples Rede Social construida em MVC'
-       ];    
-       
      
-       //método view está em /libraries/Controller
-       $this->view('pages/index' ,$data);
     }
 
-    //url /mvc/pages/about
+    // Load Homepage
+    public function index(){
+      // If logged in, redirect to posts
+      if(isset($_SESSION['user_id'])){
+        redirect('posts');
+      }
+
+      //Set Data
+      $data = [
+        'title' => 'Welcome To SharePosts',
+        'description' => 'Simple social network built on the TraversyMVC PHP framework'
+      ];
+
+      // Load homepage/index view
+      $this->view('pages/index', $data);
+    }
+
     public function about(){
-        $data = [
-            'title' => 'Sobre Nós',
-            'description' => 'App para compartilhar posts com outros usuários'
-        ];            
-        
-        $this->view('pages/about', $data);
-    } 
-    
-}
+      //Set Data
+      $data = [
+        'version' => '1.0.0'
+      ];
+
+      // Load about view
+      $this->view('pages/about', $data);
+    }
+  }
